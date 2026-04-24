@@ -1,0 +1,1195 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Industrias Garavito — Tecnología del Futuro</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;700;900&family=JetBrains+Mono:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+--neon:#00FFB2;
+--neon2:#FF3D71;
+--neon3:#3D8EFF;
+--bg:#050A0F;
+--bg2:#0A1520;
+--bg3:#0F1E2E;
+--text:#E8F4FF;
+--muted:#4A7FA5;
+--card:#0D1B2A;
+--border:rgba(0,255,178,0.15);
+--border2:rgba(61,142,255,0.2);
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'Space Grotesk',sans-serif;overflow-x:hidden;cursor:none}
+
+/* Custom cursor */
+#cursor{position:fixed;width:12px;height:12px;background:var(--neon);border-radius:50%;pointer-events:none;z-index:9999;transition:transform 0.1s;mix-blend-mode:screen}
+#cursor-trail{position:fixed;width:32px;height:32px;border:1px solid rgba(0,255,178,0.4);border-radius:50%;pointer-events:none;z-index:9998;transition:all 0.18s ease}
+
+/* Scanline overlay */
+body::before{content:'';position:fixed;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,0.03) 2px,rgba(0,0,0,0.03) 4px);pointer-events:none;z-index:1000}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:500;padding:18px 60px;display:flex;justify-content:space-between;align-items:center;background:linear-gradient(to bottom,rgba(5,10,15,0.97),rgba(5,10,15,0.8));backdrop-filter:blur(16px);border-bottom:1px solid rgba(0,255,178,0.08)}
+.logo{font-family:'JetBrains Mono',monospace;font-size:20px;font-weight:700;color:var(--neon);letter-spacing:0.1em;text-shadow:0 0 20px rgba(0,255,178,0.5);cursor:pointer}
+.logo span{color:var(--text);opacity:0.4}
+.nav-links{display:flex;gap:36px;list-style:none}
+.nav-links a{color:var(--muted);font-size:12px;font-weight:500;text-decoration:none;letter-spacing:0.15em;text-transform:uppercase;transition:color 0.2s;cursor:pointer}
+.nav-links a:hover{color:var(--neon)}
+.nav-right{display:flex;align-items:center;gap:16px}
+
+/* Cart button */
+.cart-btn{position:relative;padding:10px 20px;border:1px solid var(--neon);color:var(--neon);font-size:12px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;cursor:pointer;background:transparent;transition:all 0.2s;clip-path:polygon(8px 0%,100% 0%,100% calc(100% - 8px),calc(100% - 8px) 100%,0% 100%,0% 8px);font-family:'Space Grotesk',sans-serif}
+.cart-btn:hover{background:var(--neon);color:var(--bg)}
+.cart-count{position:absolute;top:-6px;right:-6px;width:18px;height:18px;background:var(--neon2);border-radius:50%;font-size:10px;display:flex;align-items:center;justify-content:center;font-weight:700;color:white}
+
+/* HERO */
+#hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:140px 60px 80px;position:relative;overflow:hidden}
+.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 70% 40%,rgba(61,142,255,0.06) 0%,transparent 70%),radial-gradient(ellipse 60% 80% at 20% 60%,rgba(0,255,178,0.04) 0%,transparent 70%)}
+.grid-lines{position:absolute;inset:0;background-image:linear-gradient(rgba(0,255,178,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(0,255,178,0.04) 1px,transparent 1px);background-size:60px 60px;mask-image:radial-gradient(ellipse 80% 70% at 60% 50%,black,transparent)}
+.hero-tag{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:0.3em;color:var(--neon);text-transform:uppercase;margin-bottom:24px;display:flex;align-items:center;gap:12px}
+.hero-tag::before{content:'';width:40px;height:1px;background:var(--neon);box-shadow:0 0 8px var(--neon)}
+.hero-title{font-size:clamp(52px,8vw,110px);font-weight:900;line-height:0.92;letter-spacing:-0.03em;margin-bottom:32px}
+.hero-title .line1{display:block;color:var(--text)}
+.hero-title .line2{display:block;color:transparent;-webkit-text-stroke:1px rgba(0,255,178,0.6)}
+.hero-title .line3{display:block;color:var(--neon);text-shadow:0 0 40px rgba(0,255,178,0.3)}
+.hero-sub{max-width:520px;font-size:17px;line-height:1.7;color:rgba(232,244,255,0.55);margin-bottom:48px;font-weight:300}
+.hero-actions{display:flex;gap:16px;flex-wrap:wrap}
+.btn-primary{padding:16px 40px;background:var(--neon);color:var(--bg);font-weight:700;font-size:14px;letter-spacing:0.15em;text-transform:uppercase;border:none;cursor:pointer;clip-path:polygon(12px 0%,100% 0%,100% calc(100% - 12px),calc(100% - 12px) 100%,0% 100%,0% 12px);transition:all 0.2s;box-shadow:0 0 30px rgba(0,255,178,0.25);font-family:'Space Grotesk',sans-serif}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 40px rgba(0,255,178,0.4)}
+.btn-secondary{padding:16px 40px;background:transparent;color:var(--text);font-weight:500;font-size:14px;letter-spacing:0.15em;text-transform:uppercase;border:1px solid rgba(232,244,255,0.2);cursor:pointer;clip-path:polygon(12px 0%,100% 0%,100% calc(100% - 12px),calc(100% - 12px) 100%,0% 100%,0% 12px);transition:all 0.2s;font-family:'Space Grotesk',sans-serif}
+.btn-secondary:hover{border-color:var(--neon);color:var(--neon)}
+.hero-visual{position:absolute;right:60px;top:50%;transform:translateY(-50%);width:420px;height:420px}
+.model-container{width:100%;height:100%;position:relative;display:flex;align-items:center;justify-content:center}
+canvas#heroCanvas{position:absolute;inset:0;width:100%!important;height:100%!important}
+.model-rings{position:absolute;inset:0;animation:spin 20s linear infinite}
+.model-rings::before,.model-rings::after{content:'';position:absolute;inset:0;border-radius:50%}
+.model-rings::before{border:1px solid rgba(0,255,178,0.12);border-top-color:var(--neon);animation:spin 8s linear infinite}
+.model-rings::after{inset:20px;border:1px solid rgba(61,142,255,0.12);border-left-color:var(--neon3);animation:spin-rev 12s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes spin-rev{to{transform:rotate(-360deg)}}
+
+/* Stats bar */
+.stats-bar{display:flex;gap:0;margin-top:60px;border:1px solid var(--border);background:rgba(13,27,42,0.6);backdrop-filter:blur(20px);clip-path:polygon(16px 0%,100% 0%,calc(100% - 16px) 100%,0% 100%)}
+.stat-item{flex:1;padding:24px 32px;border-right:1px solid var(--border);position:relative;overflow:hidden;transition:background 0.3s}
+.stat-item:last-child{border-right:none}
+.stat-item::before{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--neon),transparent);transform:scaleX(0);transition:transform 0.4s}
+.stat-item:hover::before{transform:scaleX(1)}
+.stat-item:hover{background:rgba(0,255,178,0.03)}
+.stat-num{font-family:'JetBrains Mono',monospace;font-size:32px;font-weight:700;color:var(--neon);text-shadow:0 0 15px rgba(0,255,178,0.4)}
+.stat-label{font-size:12px;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);margin-top:4px}
+
+/* SECTION COMMONS */
+.section-tag{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.3em;text-transform:uppercase;color:var(--neon);margin-bottom:12px}
+.section-title{font-size:clamp(32px,4vw,52px);font-weight:900;line-height:1.05;letter-spacing:-0.02em}
+.section-title span{color:var(--neon)}
+.section-header{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:64px}
+.section-desc{max-width:360px;font-size:15px;line-height:1.7;color:rgba(232,244,255,0.45);font-weight:300}
+
+/* CATALOGUE SECTION */
+#catalogo{padding:120px 60px}
+.filter-bar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:48px}
+.filter-btn{padding:8px 20px;background:transparent;border:1px solid rgba(0,255,178,0.2);color:var(--muted);font-size:12px;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;cursor:pointer;transition:all 0.2s;font-family:'Space Grotesk',sans-serif;clip-path:polygon(6px 0%,100% 0%,calc(100% - 6px) 100%,0% 100%)}
+.filter-btn:hover,.filter-btn.active{background:rgba(0,255,178,0.08);border-color:var(--neon);color:var(--neon)}
+.products-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:2px;background:rgba(0,255,178,0.06)}
+.product-card{background:var(--bg);padding:0;position:relative;overflow:hidden;transition:all 0.3s;display:flex;flex-direction:column}
+.product-card:hover{background:var(--card)}
+.product-card.agotado{opacity:0.6}
+.product-img{width:100%;height:220px;background:var(--bg2);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;font-size:72px}
+.product-img-bg{position:absolute;inset:0;background:radial-gradient(ellipse 60% 60% at 50% 50%,rgba(0,255,178,0.06),transparent)}
+.product-badge{position:absolute;top:12px;left:12px;padding:4px 10px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.15em;text-transform:uppercase;clip-path:polygon(4px 0%,100% 0%,calc(100% - 4px) 100%,0% 100%)}
+.badge-nuevo{background:rgba(0,255,178,0.15);color:var(--neon);border:1px solid rgba(0,255,178,0.3)}
+.badge-oferta{background:rgba(255,61,113,0.15);color:var(--neon2);border:1px solid rgba(255,61,113,0.3)}
+.badge-agotado{background:rgba(255,61,113,0.2);color:var(--neon2);border:1px solid rgba(255,61,113,0.4)}
+.badge-destacado{background:rgba(61,142,255,0.15);color:var(--neon3);border:1px solid rgba(61,142,255,0.3)}
+.product-body{padding:24px 28px;flex:1;display:flex;flex-direction:column}
+.product-cat{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+.product-name{font-size:18px;font-weight:700;letter-spacing:-0.01em;margin-bottom:8px;line-height:1.3}
+.product-desc{font-size:13px;line-height:1.6;color:rgba(232,244,255,0.45);font-weight:300;flex:1;margin-bottom:16px}
+.product-specs{display:flex;flex-direction:column;gap:4px;margin-bottom:16px}
+.product-spec-row{display:flex;justify-content:space-between;font-size:11px;border-bottom:1px solid rgba(255,255,255,0.04);padding-bottom:4px}
+.spec-key{color:var(--muted);font-family:'JetBrains Mono',monospace;letter-spacing:0.05em}
+.spec-val{color:var(--text);font-family:'JetBrains Mono',monospace}
+.product-footer{display:flex;justify-content:space-between;align-items:center;padding-top:16px;border-top:1px solid rgba(0,255,178,0.08)}
+.product-price{font-family:'JetBrains Mono',monospace;font-size:22px;font-weight:700;color:var(--neon);text-shadow:0 0 12px rgba(0,255,178,0.3)}
+.product-price-old{font-size:13px;color:var(--muted);text-decoration:line-through;margin-bottom:2px;font-family:'JetBrains Mono',monospace}
+.add-cart-btn{padding:10px 20px;background:transparent;border:1px solid var(--neon);color:var(--neon);font-size:11px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;cursor:pointer;clip-path:polygon(6px 0%,100% 0%,100% calc(100% - 6px),calc(100% - 6px) 100%,0% 100%,0% 6px);transition:all 0.2s;font-family:'Space Grotesk',sans-serif}
+.add-cart-btn:hover:not(:disabled){background:var(--neon);color:var(--bg)}
+.add-cart-btn:disabled{opacity:0.35;cursor:not-allowed;border-color:var(--muted);color:var(--muted)}
+.product-hover-overlay{position:absolute;inset:0;background:rgba(0,255,178,0.02);opacity:0;transition:opacity 0.3s;pointer-events:none}
+.product-card:hover .product-hover-overlay{opacity:1}
+
+/* CART SIDEBAR */
+#cart-sidebar{position:fixed;top:0;right:-480px;width:480px;height:100vh;background:var(--bg2);border-left:1px solid var(--border);z-index:2000;transition:right 0.4s cubic-bezier(0.4,0,0.2,1);display:flex;flex-direction:column;overflow:hidden}
+#cart-sidebar.open{right:0}
+.cart-header{padding:28px 32px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center}
+.cart-header h3{font-family:'JetBrains Mono',monospace;font-size:14px;letter-spacing:0.3em;text-transform:uppercase;color:var(--neon)}
+.close-btn{background:none;border:none;color:var(--muted);font-size:22px;cursor:pointer;transition:color 0.2s;line-height:1}
+.close-btn:hover{color:var(--text)}
+.cart-items{flex:1;overflow-y:auto;padding:24px 32px}
+.cart-items::-webkit-scrollbar{width:4px}
+.cart-items::-webkit-scrollbar-track{background:transparent}
+.cart-items::-webkit-scrollbar-thumb{background:var(--border)}
+.cart-empty{text-align:center;padding:80px 0;color:var(--muted)}
+.cart-empty .empty-icon{font-size:48px;margin-bottom:16px;opacity:0.3}
+.cart-empty p{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:0.15em;text-transform:uppercase}
+.cart-item{display:flex;gap:16px;padding:16px 0;border-bottom:1px solid rgba(255,255,255,0.05)}
+.cart-item-icon{width:56px;height:56px;background:var(--card);display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0;clip-path:polygon(6px 0%,100% 0%,100% calc(100% - 6px),calc(100% - 6px) 100%,0% 100%,0% 6px)}
+.cart-item-info{flex:1}
+.cart-item-name{font-size:14px;font-weight:600;margin-bottom:4px}
+.cart-item-price{font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--neon)}
+.cart-item-controls{display:flex;align-items:center;gap:8px;margin-top:8px}
+.qty-btn{width:24px;height:24px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);color:var(--text);cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center;transition:all 0.15s}
+.qty-btn:hover{background:rgba(0,255,178,0.1);border-color:var(--neon);color:var(--neon)}
+.qty-display{font-family:'JetBrains Mono',monospace;font-size:13px;min-width:24px;text-align:center}
+.remove-item{margin-left:auto;background:none;border:none;color:var(--muted);cursor:pointer;font-size:14px;transition:color 0.2s;padding:4px}
+.remove-item:hover{color:var(--neon2)}
+.cart-footer{padding:24px 32px;border-top:1px solid var(--border)}
+.cart-total-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}
+.cart-total-label{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted)}
+.cart-total-val{font-family:'JetBrains Mono',monospace;font-size:28px;font-weight:700;color:var(--neon)}
+.checkout-btn{width:100%;padding:16px;background:var(--neon);color:var(--bg);font-weight:700;font-size:14px;letter-spacing:0.15em;text-transform:uppercase;border:none;cursor:pointer;clip-path:polygon(12px 0%,100% 0%,100% calc(100% - 12px),calc(100% - 12px) 100%,0% 100%,0% 12px);transition:all 0.2s;font-family:'Space Grotesk',sans-serif}
+.checkout-btn:hover{box-shadow:0 8px 30px rgba(0,255,178,0.4);transform:translateY(-1px)}
+#cart-overlay{position:fixed;inset:0;background:rgba(5,10,15,0.7);z-index:1999;display:none;backdrop-filter:blur(4px)}
+#cart-overlay.open{display:block}
+
+/* FOOTER */
+footer{padding:40px 60px;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center}
+.footer-logo{font-family:'JetBrains Mono',monospace;font-size:18px;font-weight:700;color:var(--neon)}
+.footer-text{font-size:12px;letter-spacing:0.1em;color:var(--muted)}
+
+/* ANIMATIONS */
+@keyframes fadeInUp{from{opacity:0;transform:translateY(40px)}to{opacity:1;transform:translateY(0)}}
+.hero-tag{animation:fadeInUp 0.8s 0.1s ease forwards;opacity:0}
+.hero-title{animation:fadeInUp 0.8s 0.3s ease forwards;opacity:0}
+.hero-sub{animation:fadeInUp 0.8s 0.5s ease forwards;opacity:0}
+.hero-actions{animation:fadeInUp 0.8s 0.7s ease forwards;opacity:0}
+.stats-bar{animation:fadeInUp 0.8s 0.9s ease forwards;opacity:0}
+.reveal{opacity:0;transform:translateY(30px);transition:all 0.7s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+/* ADMIN BUTTON */
+#admin-btn{position:fixed;bottom:28px;right:28px;z-index:5000;width:44px;height:44px;background:rgba(13,27,42,0.9);border:1px solid rgba(0,255,178,0.2);border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:18px;backdrop-filter:blur(10px);transition:all 0.2s;box-shadow:0 4px 20px rgba(0,0,0,0.4)}
+#admin-btn:hover{border-color:var(--neon);box-shadow:0 0 20px rgba(0,255,178,0.2)}
+
+/* ADMIN OVERLAY */
+#admin-overlay{display:none;position:fixed;inset:0;z-index:6000;background:rgba(5,10,15,0.94);backdrop-filter:blur(20px);align-items:flex-start;justify-content:center;overflow-y:auto;padding:40px 20px}
+#admin-overlay.open{display:flex}
+#admin-panel{background:var(--bg2);border:1px solid var(--border);clip-path:polygon(20px 0%,100% 0%,100% calc(100% - 20px),calc(100% - 20px) 100%,0% 100%,0% 20px);padding:48px 52px;width:min(800px,95vw);position:relative;margin:auto}
+#admin-panel h2{font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:0.3em;text-transform:uppercase;color:var(--neon);margin-bottom:32px}
+.admin-tabs{display:flex;gap:2px;margin-bottom:32px;background:rgba(0,255,178,0.04);padding:4px}
+.admin-tab{flex:1;padding:10px;background:transparent;border:none;color:var(--muted);font-size:12px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;cursor:pointer;transition:all 0.2s;font-family:'Space Grotesk',sans-serif}
+.admin-tab.active{background:rgba(0,255,178,0.1);color:var(--neon)}
+.admin-tab-content{display:none}
+.admin-tab-content.active{display:block}
+.admin-section{margin-bottom:28px}
+.admin-label{font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);margin-bottom:10px;display:block}
+.admin-input{width:100%;padding:12px 16px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);color:var(--text);font-family:'Space Grotesk',sans-serif;font-size:14px;outline:none;clip-path:polygon(8px 0%,100% 0%,100% calc(100% - 8px),calc(100% - 8px) 100%,0% 100%,0% 8px);transition:border-color 0.2s}
+.admin-input:focus{border-color:rgba(0,255,178,0.4)}
+select.admin-input{cursor:pointer}
+.admin-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.admin-row-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px}
+.admin-actions{display:flex;gap:10px;margin-top:32px;flex-wrap:wrap}
+.admin-close{position:absolute;top:20px;right:24px;background:none;border:none;color:var(--muted);font-size:20px;cursor:pointer;transition:color 0.2s;line-height:1}
+.admin-close:hover{color:var(--text)}
+#admin-login{display:block}
+#admin-panel-content{display:none}
+#admin-error{color:var(--neon2);font-size:12px;margin-top:8px;display:none;font-family:'JetBrains Mono',monospace}
+.admin-save-msg{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--neon);letter-spacing:0.15em;margin-top:12px;opacity:0;transition:opacity 0.3s}
+
+/* PRODUCT ADMIN TABLE */
+.products-table{width:100%;border-collapse:collapse;font-size:13px}
+.products-table th{text-align:left;padding:10px 12px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);border-bottom:1px solid var(--border)}
+.products-table td{padding:12px 12px;border-bottom:1px solid rgba(255,255,255,0.04);vertical-align:middle}
+.products-table tr:hover td{background:rgba(0,255,178,0.02)}
+.tbl-name{font-weight:600;font-size:14px}
+.tbl-price{font-family:'JetBrains Mono',monospace;color:var(--neon)}
+.tbl-cat{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted);letter-spacing:0.1em;text-transform:uppercase}
+.tbl-actions{display:flex;gap:6px}
+.tbl-btn{padding:5px 12px;font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;cursor:pointer;border:1px solid;clip-path:polygon(4px 0%,100% 0%,calc(100% - 4px) 100%,0% 100%);transition:all 0.2s;font-family:'Space Grotesk',sans-serif;background:transparent}
+.tbl-btn-edit{border-color:rgba(61,142,255,0.4);color:var(--neon3)}
+.tbl-btn-edit:hover{background:rgba(61,142,255,0.1)}
+.tbl-btn-del{border-color:rgba(255,61,113,0.4);color:var(--neon2)}
+.tbl-btn-del:hover{background:rgba(255,61,113,0.1)}
+.status-badge{padding:3px 8px;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:0.1em;text-transform:uppercase;clip-path:polygon(4px 0%,100% 0%,calc(100% - 4px) 100%,0% 100%)}
+.status-activo{background:rgba(0,255,178,0.1);color:var(--neon);border:1px solid rgba(0,255,178,0.3)}
+.status-agotado{background:rgba(255,61,113,0.1);color:var(--neon2);border:1px solid rgba(255,61,113,0.3)}
+.emoji-picker{display:grid;grid-template-columns:repeat(8,1fr);gap:4px;margin-top:8px}
+.emoji-opt{padding:8px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);cursor:pointer;font-size:18px;text-align:center;transition:all 0.15s;border-radius:2px}
+.emoji-opt:hover,.emoji-opt.selected{background:rgba(0,255,178,0.1);border-color:var(--neon)}
+.admin-divider{height:1px;background:rgba(0,255,178,0.08);margin:24px 0}
+.site-setting-row{display:flex;align-items:center;justify-content:space-between;padding:14px;border:1px solid rgba(255,255,255,0.06);margin-bottom:8px;background:rgba(255,255,255,0.02)}
+.site-setting-info{font-size:13px;font-weight:500}
+.site-setting-sub{font-size:11px;color:var(--muted);margin-top:2px;font-family:'JetBrains Mono',monospace;letter-spacing:0.05em}
+.toggle-switch{position:relative;width:40px;height:22px;cursor:pointer;flex-shrink:0}
+.toggle-switch input{opacity:0;width:0;height:0}
+.toggle-track{position:absolute;inset:0;background:rgba(255,255,255,0.1);border-radius:11px;transition:background 0.2s}
+.toggle-thumb{position:absolute;top:3px;left:3px;width:16px;height:16px;border-radius:50%;background:var(--muted);transition:all 0.2s}
+.toggle-switch input:checked ~ .toggle-track{background:rgba(0,255,178,0.25)}
+.toggle-switch input:checked ~ .toggle-thumb{left:21px;background:var(--neon);box-shadow:0 0 8px rgba(0,255,178,0.5)}
+.admin-stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:28px}
+.admin-stat-card{padding:20px;background:rgba(0,255,178,0.03);border:1px solid var(--border);text-align:center}
+.admin-stat-num{font-family:'JetBrains Mono',monospace;font-size:26px;font-weight:700;color:var(--neon)}
+.admin-stat-label{font-size:11px;color:var(--muted);letter-spacing:0.1em;text-transform:uppercase;margin-top:4px}
+
+/* ORDER OVERLAY */
+#order-overlay{display:none;position:fixed;inset:0;z-index:7000;background:rgba(5,10,15,0.96);backdrop-filter:blur(20px);align-items:center;justify-content:center}
+#order-overlay.open{display:flex}
+.order-panel{background:var(--bg2);border:1px solid var(--border);clip-path:polygon(20px 0%,100% 0%,100% calc(100% - 20px),calc(100% - 20px) 100%,0% 100%,0% 20px);padding:52px;width:min(560px,90vw);text-align:center;position:relative}
+.order-icon{font-size:52px;margin-bottom:20px}
+.order-title{font-size:28px;font-weight:900;letter-spacing:-0.02em;margin-bottom:12px;color:var(--neon)}
+.order-sub{font-size:15px;color:rgba(232,244,255,0.5);line-height:1.6;margin-bottom:32px}
+.order-code{font-family:'JetBrains Mono',monospace;font-size:20px;letter-spacing:0.2em;color:var(--neon);padding:12px 24px;border:1px solid rgba(0,255,178,0.3);background:rgba(0,255,178,0.05);display:inline-block;margin-bottom:32px}
+
+/* TOAST */
+#toast-container{position:fixed;bottom:80px;right:28px;z-index:8000;display:flex;flex-direction:column;gap:8px;pointer-events:none}
+.toast{padding:12px 20px;background:var(--bg2);border:1px solid var(--border);font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:0.1em;clip-path:polygon(8px 0%,100% 0%,calc(100% - 8px) 100%,0% 100%);animation:toastIn 0.3s ease,toastOut 0.3s ease 2.5s forwards;white-space:nowrap}
+.toast-success{border-color:rgba(0,255,178,0.4);color:var(--neon)}
+.toast-error{border-color:rgba(255,61,113,0.4);color:var(--neon2)}
+@keyframes toastIn{from{opacity:0;transform:translateX(20px)}to{opacity:1;transform:translateX(0)}}
+@keyframes toastOut{to{opacity:0;transform:translateX(20px)}}
+
+/* PRODUCT DETAIL MODAL */
+#product-modal{display:none;position:fixed;inset:0;z-index:3000;background:rgba(5,10,15,0.9);backdrop-filter:blur(16px);align-items:center;justify-content:center;padding:20px}
+#product-modal.open{display:flex}
+.modal-panel{background:var(--bg2);border:1px solid var(--border);clip-path:polygon(24px 0%,100% 0%,100% calc(100% - 24px),calc(100% - 24px) 100%,0% 100%,0% 24px);width:min(900px,95vw);max-height:90vh;overflow-y:auto;display:grid;grid-template-columns:1fr 1fr;position:relative}
+.modal-img{background:var(--card);display:flex;align-items:center;justify-content:center;font-size:100px;min-height:360px;position:relative}
+.modal-img-bg{position:absolute;inset:0;background:radial-gradient(ellipse 60% 60% at 50% 50%,rgba(0,255,178,0.07),transparent)}
+.modal-info{padding:40px;display:flex;flex-direction:column}
+.modal-cat{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.25em;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
+.modal-name{font-size:28px;font-weight:900;letter-spacing:-0.02em;margin-bottom:12px;line-height:1.2}
+.modal-desc{font-size:14px;line-height:1.7;color:rgba(232,244,255,0.5);margin-bottom:24px;flex:1}
+.modal-specs{margin-bottom:24px}
+.modal-spec-row{display:flex;justify-content:space-between;font-size:12px;border-bottom:1px solid rgba(255,255,255,0.05);padding:6px 0}
+.modal-price-area{border-top:1px solid rgba(0,255,178,0.1);padding-top:20px;display:flex;align-items:center;justify-content:space-between}
+.modal-price{font-family:'JetBrains Mono',monospace;font-size:30px;font-weight:700;color:var(--neon)}
+.modal-close{position:absolute;top:20px;right:24px;background:rgba(5,10,15,0.8);border:1px solid rgba(255,255,255,0.1);color:var(--muted);font-size:20px;cursor:pointer;width:36px;height:36px;display:flex;align-items:center;justify-content:center;border-radius:50%;transition:all 0.2s;z-index:10}
+.modal-close:hover{border-color:var(--neon);color:var(--text)}
+@media(max-width:700px){.modal-panel{grid-template-columns:1fr}.modal-img{min-height:200px;font-size:60px}}
+</style>
+</head>
+<body>
+
+<div id="cursor"></div>
+<div id="cursor-trail"></div>
+<div id="toast-container"></div>
+<div id="cart-overlay" onclick="closeCart()"></div>
+
+<!-- NAV -->
+<nav>
+  <div class="logo" id="site-logo" onclick="scrollTo(0,0)">IND<span>/</span>GARAVITO</div>
+  <ul class="nav-links">
+    <li><a onclick="document.getElementById('catalogo').scrollIntoView({behavior:'smooth'})">Tienda</a></li>
+    <li><a onclick="document.getElementById('nosotros').scrollIntoView({behavior:'smooth'})">Nosotros</a></li>
+    <li><a onclick="document.getElementById('contacto').scrollIntoView({behavior:'smooth'})">Contacto</a></li>
+  </ul>
+  <div class="nav-right">
+    <button class="cart-btn" onclick="openCart()">
+      🛒 Carrito
+      <span class="cart-count" id="cart-count" style="display:none">0</span>
+    </button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="grid-lines"></div>
+  <div class="hero-tag">Fabricante de Tecnología de Precisión</div>
+  <h1 class="hero-title">
+    <span class="line1">HARDWARE</span>
+    <span class="line2">DEL FUTURO</span>
+    <span class="line3">HOY.</span>
+  </h1>
+  <p class="hero-sub">Dispositivos, componentes y sistemas electrónicos de alta precisión. Diseñados en Guatemala. Construidos para el mundo.</p>
+  <div class="hero-actions">
+    <button class="btn-primary" onclick="document.getElementById('catalogo').scrollIntoView({behavior:'smooth'})">Ver Catálogo</button>
+    <button class="btn-secondary" onclick="document.getElementById('nosotros').scrollIntoView({behavior:'smooth'})">Nuestra Tecnología</button>
+  </div>
+  <div class="hero-visual">
+    <div class="model-container">
+      <div class="model-rings"></div>
+      <canvas id="heroCanvas"></canvas>
+    </div>
+  </div>
+  <div class="stats-bar">
+    <div class="stat-item"><div class="stat-num" id="cnt1">0</div><div class="stat-label">Unidades vendidas</div></div>
+    <div class="stat-item"><div class="stat-num" id="cnt2">0</div><div class="stat-label">Clientes activos</div></div>
+    <div class="stat-item"><div class="stat-num">4.9★</div><div class="stat-label">Valoración media</div></div>
+    <div class="stat-item"><div class="stat-num" id="cnt3">0</div><div class="stat-label">Países con envío</div></div>
+  </div>
+</section>
+
+<!-- CATALOGO -->
+<section id="catalogo" style="padding:120px 60px">
+  <div class="section-header reveal">
+    <div>
+      <div class="section-tag">// 01 — Tienda</div>
+      <h2 class="section-title">Catálogo de<br><span>productos</span></h2>
+    </div>
+    <p class="section-desc">Tecnología de fabricación propia. Garantía total. Envío desde Guatemala a toda Latinoamérica.</p>
+  </div>
+  <div class="filter-bar reveal" id="filter-bar"></div>
+  <div class="products-grid" id="products-grid"></div>
+</section>
+
+<!-- NOSOTROS -->
+<section id="nosotros" style="padding:80px 60px 120px">
+  <div class="section-header reveal">
+    <div>
+      <div class="section-tag">// 02 — Empresa</div>
+      <h2 class="section-title">Tecnología hecha<br><span>en Guatemala</span></h2>
+    </div>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:rgba(0,255,178,0.06)" class="reveal">
+    <div style="background:var(--bg);padding:40px 36px">
+      <div style="font-size:36px;margin-bottom:16px">⚡</div>
+      <div style="font-size:20px;font-weight:700;margin-bottom:12px">Ingeniería Propia</div>
+      <div style="font-size:14px;line-height:1.7;color:rgba(232,244,255,0.45)">Cada producto es diseñado, prototipado y manufacturado en nuestras instalaciones en Guatemala City.</div>
+    </div>
+    <div style="background:var(--card);padding:40px 36px">
+      <div style="font-size:36px;margin-bottom:16px">🔬</div>
+      <div style="font-size:20px;font-weight:700;margin-bottom:12px">I+D Constante</div>
+      <div style="font-size:14px;line-height:1.7;color:rgba(232,244,255,0.45)">Laboratorio de innovación activo. Lanzamos nuevos productos cada trimestre basados en feedback de clientes.</div>
+    </div>
+    <div style="background:var(--bg);padding:40px 36px">
+      <div style="font-size:36px;margin-bottom:16px">🌐</div>
+      <div style="font-size:20px;font-weight:700;margin-bottom:12px">Alcance Regional</div>
+      <div style="font-size:14px;line-height:1.7;color:rgba(232,244,255,0.45)">Distribución en toda Centroamérica y envíos a Sudamérica, México y Estados Unidos.</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACTO -->
+<section id="contacto" style="padding:0 60px 120px">
+  <div style="border:1px solid var(--border);background:linear-gradient(135deg,var(--card),var(--bg2));padding:72px 80px;clip-path:polygon(24px 0%,100% 0%,100% calc(100% - 24px),calc(100% - 24px) 100%,0% 100%,0% 24px);position:relative" class="reveal">
+    <div style="position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 50%,rgba(0,255,178,0.04),transparent)"></div>
+    <div style="font-size:clamp(36px,5vw,60px);font-weight:900;letter-spacing:-0.03em;margin-bottom:16px">¿Proyecto especial o<br>pedido <em style="font-style:normal;color:var(--neon)">mayorista</em>?</div>
+    <p style="font-size:16px;line-height:1.7;color:rgba(232,244,255,0.45);max-width:500px;margin-bottom:40px;font-weight:300">Contáctanos para cotizaciones personalizadas, integraciones y proyectos a medida.</p>
+    <div style="display:flex;gap:12px;flex-wrap:wrap">
+      <input class="cta-input" type="text" placeholder="Tu nombre" id="contact-nombre" style="flex:1;min-width:200px;padding:16px 20px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);color:var(--text);font-family:'Space Grotesk',sans-serif;font-size:15px;outline:none;clip-path:polygon(8px 0%,100% 0%,100% calc(100% - 8px),calc(100% - 8px) 100%,0% 100%,0% 8px)">
+      <input class="cta-input" type="email" placeholder="tu@empresa.com" id="contact-email" style="flex:1;min-width:200px;padding:16px 20px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);color:var(--text);font-family:'Space Grotesk',sans-serif;font-size:15px;outline:none;clip-path:polygon(8px 0%,100% 0%,100% calc(100% - 8px),calc(100% - 8px) 100%,0% 100%,0% 8px)">
+      <button class="btn-primary" onclick="submitContact()">Enviar Mensaje</button>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo" id="footer-logo">IND/GARAVITO</div>
+  <div class="footer-text" id="footer-text">© 2025 Industrias Garavito · Fabricante de Tecnología · Guatemala</div>
+  <div style="font-family:'JetBrains Mono',monospace;color:var(--neon);font-size:11px">SYS.STATUS: ONLINE</div>
+</footer>
+
+<!-- ADMIN BUTTON -->
+<button id="admin-btn" title="Panel Admin">⚙</button>
+
+<!-- ADMIN OVERLAY -->
+<div id="admin-overlay">
+  <div id="admin-panel">
+    <button class="admin-close" onclick="closeAdmin()">✕</button>
+
+    <!-- LOGIN -->
+    <div id="admin-login">
+      <h2>// Panel Administrador</h2>
+      <div class="admin-section">
+        <label class="admin-label">Contraseña</label>
+        <input class="admin-input" type="password" id="admin-pass" placeholder="Ingresa la contraseña" onkeydown="if(event.key==='Enter')checkPass()">
+        <div id="admin-error">⚠ Contraseña incorrecta</div>
+      </div>
+      <button class="btn-primary" onclick="checkPass()">Ingresar</button>
+    </div>
+
+    <!-- PANEL CONTENT -->
+    <div id="admin-panel-content">
+      <h2>// Panel Administrador — Industrias Garavito</h2>
+
+      <!-- STATS -->
+      <div class="admin-stats-grid" id="admin-stats"></div>
+
+      <!-- TABS -->
+      <div class="admin-tabs">
+        <button class="admin-tab active" onclick="switchTab('productos')">Productos</button>
+        <button class="admin-tab" onclick="switchTab('nuevo')">Agregar Producto</button>
+        <button class="admin-tab" onclick="switchTab('sitio')">Configuración</button>
+      </div>
+
+      <!-- TAB: PRODUCTOS -->
+      <div class="admin-tab-content active" id="tab-productos">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
+          <span style="font-size:13px;color:var(--muted);font-family:'JetBrains Mono',monospace">TOTAL: <span id="product-count" style="color:var(--neon)">0</span> PRODUCTOS</span>
+          <input class="admin-input" type="text" placeholder="Buscar producto..." id="admin-search" oninput="renderAdminTable()" style="width:220px;padding:8px 12px">
+        </div>
+        <div style="overflow-x:auto">
+          <table class="products-table" id="admin-table">
+            <thead>
+              <tr>
+                <th>Icono</th>
+                <th>Nombre</th>
+                <th>Categoría</th>
+                <th>Precio</th>
+                <th>Estado</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody id="admin-table-body"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- TAB: NUEVO PRODUCTO -->
+      <div class="admin-tab-content" id="tab-nuevo">
+        <div id="edit-mode-banner" style="display:none;padding:10px 16px;background:rgba(61,142,255,0.1);border:1px solid rgba(61,142,255,0.3);margin-bottom:20px;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--neon3)">// MODO EDICIÓN — ID: <span id="edit-id-display"></span></div>
+
+        <div class="admin-row">
+          <div class="admin-section">
+            <label class="admin-label">Nombre del Producto *</label>
+            <input class="admin-input" type="text" id="p-name" placeholder="Ej: NanoCore X1">
+          </div>
+          <div class="admin-section">
+            <label class="admin-label">Categoría *</label>
+            <select class="admin-input" id="p-cat">
+              <option value="">Seleccionar categoría</option>
+              <option value="Microcontroladores">Microcontroladores</option>
+              <option value="Sensores">Sensores</option>
+              <option value="Módulos IoT">Módulos IoT</option>
+              <option value="Computación">Computación</option>
+              <option value="Energía">Energía</option>
+              <option value="Periféricos">Periféricos</option>
+              <option value="Kits">Kits</option>
+              <option value="Software">Software</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="admin-section">
+          <label class="admin-label">Descripción</label>
+          <input class="admin-input" type="text" id="p-desc" placeholder="Descripción breve del producto">
+        </div>
+
+        <div class="admin-row-3">
+          <div class="admin-section">
+            <label class="admin-label">Precio (Q) *</label>
+            <input class="admin-input" type="number" id="p-price" placeholder="0.00" step="0.01" min="0">
+          </div>
+          <div class="admin-section">
+            <label class="admin-label">Precio Anterior (Q)</label>
+            <input class="admin-input" type="number" id="p-price-old" placeholder="0.00 (opcional)" step="0.01" min="0">
+          </div>
+          <div class="admin-section">
+            <label class="admin-label">Estado</label>
+            <select class="admin-input" id="p-status">
+              <option value="activo">Disponible</option>
+              <option value="agotado">Agotado</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="admin-row">
+          <div class="admin-section">
+            <label class="admin-label">Badge / Etiqueta</label>
+            <select class="admin-input" id="p-badge">
+              <option value="">Sin etiqueta</option>
+              <option value="nuevo">Nuevo</option>
+              <option value="oferta">Oferta</option>
+              <option value="destacado">Destacado</option>
+            </select>
+          </div>
+          <div class="admin-section">
+            <label class="admin-label">Icono del producto</label>
+            <input class="admin-input" type="text" id="p-icon" placeholder="🔧" maxlength="4" style="font-size:20px">
+          </div>
+        </div>
+
+        <div class="admin-section">
+          <label class="admin-label">Ícono rápido (click para seleccionar)</label>
+          <div class="emoji-picker" id="emoji-picker"></div>
+        </div>
+
+        <div class="admin-divider"></div>
+        <label class="admin-label">Especificaciones técnicas (máximo 4)</label>
+        <div id="specs-container"></div>
+        <button class="tbl-btn tbl-btn-edit" onclick="addSpecRow()" style="margin-top:8px;padding:8px 16px">+ Agregar especificación</button>
+
+        <div class="admin-actions">
+          <button class="btn-primary" id="save-product-btn" onclick="saveProduct()">Guardar Producto</button>
+          <button class="btn-secondary" onclick="clearProductForm()">Limpiar</button>
+          <button class="btn-secondary" id="cancel-edit-btn" style="display:none" onclick="cancelEdit()">Cancelar edición</button>
+        </div>
+        <div class="admin-save-msg" id="save-msg">✓ PRODUCTO GUARDADO</div>
+      </div>
+
+      <!-- TAB: SITIO -->
+      <div class="admin-tab-content" id="tab-sitio">
+        <div class="admin-section">
+          <label class="admin-label">Nombre del negocio</label>
+          <input class="admin-input" type="text" id="admin-nombre" placeholder="Industrias Garavito">
+        </div>
+        <div class="admin-section">
+          <label class="admin-label">Eslogan del héroe</label>
+          <input class="admin-input" type="text" id="admin-eslogan" placeholder="Ej: Hardware del Futuro">
+        </div>
+        <div class="admin-section">
+          <label class="admin-label">Subtítulo del héroe</label>
+          <input class="admin-input" type="text" id="admin-subtitulo" placeholder="Texto descriptivo bajo el título">
+        </div>
+        <div class="admin-divider"></div>
+        <label class="admin-label" style="margin-bottom:16px;display:block">Configuración de la tienda</label>
+        <div class="site-setting-row">
+          <div><div class="site-setting-info">Mostrar precios anteriores</div><div class="site-setting-sub">Tachado visible en tarjetas de producto</div></div>
+          <label class="toggle-switch"><input type="checkbox" id="toggle-oldprice" checked><div class="toggle-track"></div><div class="toggle-thumb"></div></label>
+        </div>
+        <div class="site-setting-row">
+          <div><div class="site-setting-info">Mostrar badges de productos</div><div class="site-setting-sub">Etiquetas Nuevo / Oferta / Destacado</div></div>
+          <label class="toggle-switch"><input type="checkbox" id="toggle-badges" checked><div class="toggle-track"></div><div class="toggle-thumb"></div></label>
+        </div>
+        <div class="site-setting-row">
+          <div><div class="site-setting-info">Carrito habilitado</div><div class="site-setting-sub">Usuarios pueden agregar al carrito</div></div>
+          <label class="toggle-switch"><input type="checkbox" id="toggle-cart" checked><div class="toggle-track"></div><div class="toggle-thumb"></div></label>
+        </div>
+        <div class="admin-actions">
+          <button class="btn-primary" onclick="applySiteSettings()">Aplicar configuración</button>
+        </div>
+        <div class="admin-save-msg" id="site-save-msg">✓ CONFIGURACIÓN APLICADA</div>
+      </div>
+
+      <div style="margin-top:24px;padding-top:16px;border-top:1px solid rgba(255,255,255,0.05);display:flex;justify-content:space-between;align-items:center">
+        <button class="tbl-btn tbl-btn-del" onclick="if(confirm('¿Reiniciar todos los datos?'))resetAll()">Reiniciar datos</button>
+        <button class="btn-secondary" onclick="closeAdmin()">Cerrar panel</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CART SIDEBAR -->
+<div id="cart-sidebar">
+  <div class="cart-header">
+    <h3>// Carrito</h3>
+    <button class="close-btn" onclick="closeCart()">✕</button>
+  </div>
+  <div class="cart-items" id="cart-items-container"></div>
+  <div class="cart-footer">
+    <div class="cart-total-row">
+      <span class="cart-total-label">Total</span>
+      <span class="cart-total-val" id="cart-total">Q0.00</span>
+    </div>
+    <button class="checkout-btn" onclick="checkout()">Procesar Pedido →</button>
+  </div>
+</div>
+
+<!-- PRODUCT MODAL -->
+<div id="product-modal" onclick="if(event.target===this)closeModal()">
+  <div class="modal-panel" id="modal-panel">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div class="modal-img" id="modal-img">
+      <div class="modal-img-bg"></div>
+      <span id="modal-icon"></span>
+    </div>
+    <div class="modal-info">
+      <div class="modal-cat" id="modal-cat"></div>
+      <div class="modal-name" id="modal-name"></div>
+      <div class="modal-desc" id="modal-desc"></div>
+      <div class="modal-specs" id="modal-specs"></div>
+      <div class="modal-price-area">
+        <div>
+          <div id="modal-old-price" style="font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--muted);text-decoration:line-through;display:none"></div>
+          <div class="modal-price" id="modal-price"></div>
+        </div>
+        <button class="btn-primary" id="modal-cart-btn" onclick="addFromModal()">Agregar al carrito</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ORDER SUCCESS -->
+<div id="order-overlay">
+  <div class="order-panel">
+    <button class="modal-close" onclick="closeOrder()" style="position:absolute;top:16px;right:20px">✕</button>
+    <div class="order-icon">✅</div>
+    <div class="order-title">¡Pedido Confirmado!</div>
+    <p class="order-sub">Tu pedido ha sido registrado. Nuestro equipo se pondrá en contacto contigo en las próximas 2 horas hábiles.</p>
+    <div class="order-code" id="order-code">#GRV-000000</div>
+    <button class="btn-primary" onclick="closeOrder()">Continuar comprando</button>
+  </div>
+</div>
+
+<script>
+// ========================
+// DATA STORE
+// ========================
+const ADMIN_PASSWORD = 'garavito2025';
+
+const DEFAULT_PRODUCTS = [
+  {id:1,name:'NanoCore X1',cat:'Microcontroladores',desc:'Microcontrolador de 32 bits diseñado para aplicaciones IoT industriales. Wi-Fi, Bluetooth 5.0 y soporte para hasta 32 GPIOs.',price:249,priceOld:320,status:'activo',badge:'destacado',icon:'🔧',specs:[{k:'CPU',v:'Xtensa LX7 240MHz'},{k:'RAM',v:'512KB SRAM'},{k:'Flash',v:'8MB'},{k:'Conectividad',v:'Wi-Fi 6 + BT 5.0'}]},
+  {id:2,name:'SensorHub Pro',cat:'Sensores',desc:'Hub de sensores multiprotocolo: temperatura, humedad, presión, acelerómetro y giroscopio en un solo módulo compacto.',price:189,priceOld:null,status:'activo',badge:'nuevo',icon:'📡',specs:[{k:'Sensores',v:'6 en 1'},{k:'Precisión temp.',v:'±0.1°C'},{k:'Interfaz',v:'I2C / SPI / UART'},{k:'Consumo',v:'2.1mA activo'}]},
+  {id:3,name:'PicoEdge V2',cat:'Computación',desc:'Módulo de computación en el borde para inferencia de IA local. NPU integrado a 1 TOPS de rendimiento.',price:890,priceOld:1100,status:'activo',badge:'oferta',icon:'💻',specs:[{k:'NPU',v:'1 TOPS'},{k:'CPU',v:'Quad-core A53'},{k:'RAM',v:'4GB LPDDR4'},{k:'OS',v:'Linux / RTOS'}]},
+  {id:4,name:'PowerCell GT',cat:'Energía',desc:'Módulo de gestión de energía con carga solar integrada. MPPT eficiente para proyectos remotos y portátiles.',price:145,priceOld:null,status:'activo',badge:'',icon:'⚡',specs:[{k:'Entrada solar',v:'5-30V MPPT'},{k:'Salida',v:'3.3V / 5V / 12V'},{k:'Batt. soporte',v:'LiPo / LiFePO4'},{k:'Eficiencia',v:'95%'}]},
+  {id:5,name:'MeshLink 900',cat:'Módulos IoT',desc:'Módulo de radio LoRa para redes mesh de largo alcance. Hasta 15km en línea de vista con cifrado AES-256.',price:320,priceOld:null,status:'agotado',badge:'',icon:'📶',specs:[{k:'Frecuencia',v:'915MHz ISM'},{k:'Alcance',v:'Hasta 15km'},{k:'Cifrado',v:'AES-256'},{k:'Protocolo',v:'LoRaWAN 1.1'}]},
+  {id:6,name:'DevKit Starter',cat:'Kits',desc:'Kit completo para comenzar con electrónica embebida. Incluye NanoCore X1, sensores, protoboard, cables y guía de inicio.',price:499,priceOld:650,status:'activo',badge:'nuevo',icon:'🎒',specs:[{k:'Incluye',v:'NanoCore X1'},{k:'Sensores',v:'Temperatura, luz, IR'},{k:'Extras',v:'Protoboard + 40 cables'},{k:'Guías',v:'PDF + Video tutoriales'}]},
+  {id:7,name:'ThermalSense AI',cat:'Sensores',desc:'Cámara térmica de 32x24 píxeles con IA embebida para detección de anomalías en tiempo real.',price:780,priceOld:null,status:'activo',badge:'destacado',icon:'🌡️',specs:[{k:'Resolución',v:'32x24 px'},{k:'Rango',v:'-20°C a +300°C'},{k:'FPS',v:'8 FPS'},{k:'Salida',v:'I2C + UART'}]},
+  {id:8,name:'CloudBridge Pro',cat:'Módulos IoT',desc:'Puerta de enlace industrial con soporte dual-SIM, ethernet y Wi-Fi. Conecta 200 dispositivos simultáneos.',price:1250,priceOld:null,status:'activo',badge:'',icon:'🌐',specs:[{k:'Conexiones',v:'200 dispositivos'},{k:'SIM',v:'Dual SIM 4G LTE'},{k:'CPU',v:'ARM Cortex-A7'},{k:'Almacen.',v:'32GB eMMC'}]},
+];
+
+let products = JSON.parse(localStorage.getItem('ig_products') || 'null') || DEFAULT_PRODUCTS;
+let cart = JSON.parse(localStorage.getItem('ig_cart') || '[]');
+let editingId = null;
+let currentModalProduct = null;
+
+function saveToStorage() {
+  localStorage.setItem('ig_products', JSON.stringify(products));
+  localStorage.setItem('ig_cart', JSON.stringify(cart));
+}
+
+// ========================
+// CURSOR
+// ========================
+const cur = document.getElementById('cursor');
+const trail = document.getElementById('cursor-trail');
+let mx=0,my=0,tx=0,ty=0;
+document.addEventListener('mousemove',e=>{
+  mx=e.clientX;my=e.clientY;
+  cur.style.left=(mx-6)+'px';cur.style.top=(my-6)+'px';
+});
+function animTrail(){
+  tx+=(mx-tx)*0.12;ty+=(my-ty)*0.12;
+  trail.style.left=(tx-16)+'px';trail.style.top=(ty-16)+'px';
+  requestAnimationFrame(animTrail);
+}
+animTrail();
+document.querySelectorAll('button,a').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{cur.style.transform='scale(3)';cur.style.opacity='0.5'});
+  el.addEventListener('mouseleave',()=>{cur.style.transform='scale(1)';cur.style.opacity='1'});
+});
+
+// ========================
+// CUBE ANIMATION
+// ========================
+const canvas=document.getElementById('heroCanvas');
+const ctx=canvas.getContext('2d');
+canvas.width=420;canvas.height=420;
+const cx=210,cy=210,size=100;
+let angle=0;
+const verts=[[-1,-1,-1],[1,-1,-1],[1,1,-1],[-1,1,-1],[-1,-1,1],[1,-1,1],[1,1,1],[-1,1,1]].map(v=>v.map(c=>c*size));
+const edges=[[0,1],[1,2],[2,3],[3,0],[4,5],[5,6],[6,7],[7,4],[0,4],[1,5],[2,6],[3,7]];
+function project([x,y,z]){const f=400;const d=f/(f-z*0.5);return[cx+x*d,cy+y*d]}
+function rotX(v,a){const[x,y,z]=v;return[x,y*Math.cos(a)-z*Math.sin(a),y*Math.sin(a)+z*Math.cos(a)]}
+function rotY(v,a){const[x,y,z]=v;return[x*Math.cos(a)+z*Math.sin(a),y,-x*Math.sin(a)+z*Math.cos(a)]}
+function drawCube(){
+  ctx.clearRect(0,0,420,420);
+  const a=angle;
+  const rotated=verts.map(v=>rotY(rotX(v,a*0.4),a));
+  ctx.shadowBlur=20;ctx.shadowColor='#00FFB2';
+  edges.forEach(([i,j])=>{
+    const[x1,y1]=project(rotated[i]);
+    const[x2,y2]=project(rotated[j]);
+    const grad=ctx.createLinearGradient(x1,y1,x2,y2);
+    grad.addColorStop(0,'rgba(0,255,178,0.8)');
+    grad.addColorStop(1,'rgba(61,142,255,0.4)');
+    ctx.beginPath();ctx.moveTo(x1,y1);ctx.lineTo(x2,y2);
+    ctx.strokeStyle=grad;ctx.lineWidth=1.5;ctx.stroke();
+  });
+  ctx.shadowBlur=15;ctx.shadowColor='#3D8EFF';
+  rotated.forEach(v=>{
+    const[x,y]=project(v);
+    ctx.beginPath();ctx.arc(x,y,3,0,Math.PI*2);
+    ctx.fillStyle='#3D8EFF';ctx.fill();
+  });
+  ctx.shadowBlur=0;
+  const diagonals=[[0,6],[1,7],[2,4],[3,5]];
+  diagonals.forEach(([i,j])=>{
+    const[x1,y1]=project(rotated[i]);
+    const[x2,y2]=project(rotated[j]);
+    ctx.beginPath();ctx.moveTo(x1,y1);ctx.lineTo(x2,y2);
+    ctx.strokeStyle='rgba(0,255,178,0.08)';ctx.lineWidth=0.5;ctx.stroke();
+  });
+  angle+=0.008;
+  requestAnimationFrame(drawCube);
+}
+drawCube();
+
+// ========================
+// COUNTERS
+// ========================
+function animCount(el,target,suffix=''){
+  let start=0;const dur=2000;const step=dur/60;const inc=target/60;
+  const t=setInterval(()=>{
+    start=Math.min(start+inc,target);
+    el.textContent=Math.floor(start).toLocaleString()+(suffix||'');
+    if(start>=target)clearInterval(t);
+  },step);
+}
+setTimeout(()=>{
+  animCount(document.getElementById('cnt1'),3840);
+  animCount(document.getElementById('cnt2'),520);
+  animCount(document.getElementById('cnt3'),14);
+},800);
+
+// ========================
+// SCROLL REVEAL
+// ========================
+const observer=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')});
+},{threshold:0.1});
+document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+
+// ========================
+// TOAST
+// ========================
+function showToast(msg,type='success'){
+  const t=document.createElement('div');
+  t.className=`toast toast-${type}`;
+  t.textContent=msg;
+  document.getElementById('toast-container').appendChild(t);
+  setTimeout(()=>t.remove(),3000);
+}
+
+// ========================
+// PRODUCT CATALOG
+// ========================
+let activeFilter='Todos';
+
+function getCategories(){
+  const cats=['Todos',...new Set(products.map(p=>p.cat))];
+  return cats;
+}
+
+function renderFilterBar(){
+  const bar=document.getElementById('filter-bar');
+  const cats=getCategories();
+  bar.innerHTML=cats.map(c=>`<button class="filter-btn ${c===activeFilter?'active':''}" onclick="setFilter('${c}')">${c}</button>`).join('');
+}
+
+function setFilter(cat){
+  activeFilter=cat;
+  renderFilterBar();
+  renderProducts();
+}
+
+function renderProducts(){
+  const grid=document.getElementById('products-grid');
+  const filtered=activeFilter==='Todos'?products:products.filter(p=>p.cat===activeFilter);
+  const showOldPrice=document.getElementById('toggle-oldprice')?.checked!==false;
+  const showBadges=document.getElementById('toggle-badges')?.checked!==false;
+  const cartEnabled=document.getElementById('toggle-cart')?.checked!==false;
+
+  if(filtered.length===0){
+    grid.innerHTML='<div style="grid-column:1/-1;padding:80px;text-align:center;color:var(--muted);font-family:JetBrains Mono,monospace;letter-spacing:0.15em;text-transform:uppercase;font-size:12px">// No hay productos en esta categoría</div>';
+    return;
+  }
+
+  grid.innerHTML=filtered.map(p=>{
+    const isAgotado=p.status==='agotado';
+    const badgeHTML=showBadges&&p.badge?`<span class="product-badge badge-${isAgotado?'agotado':p.badge}">${isAgotado?'AGOTADO':p.badge.toUpperCase()}</span>`:(isAgotado?'<span class="product-badge badge-agotado">AGOTADO</span>':'');
+    const oldPriceHTML=showOldPrice&&p.priceOld?`<div class="product-price-old">Q${p.priceOld.toLocaleString()}</div>`:'';
+    const specsHTML=p.specs&&p.specs.length?p.specs.slice(0,3).map(s=>`<div class="product-spec-row"><span class="spec-key">${s.k}</span><span class="spec-val">${s.v}</span></div>`).join(''):'';
+
+    return `<div class="product-card ${isAgotado?'agotado':''}" style="cursor:pointer">
+      <div class="product-hover-overlay"></div>
+      <div class="product-img" onclick="openModal(${p.id})">
+        <div class="product-img-bg"></div>
+        ${badgeHTML}
+        <span style="position:relative;z-index:1;font-size:64px;filter:drop-shadow(0 0 20px rgba(0,255,178,0.3))">${p.icon||'📦'}</span>
+      </div>
+      <div class="product-body">
+        <div class="product-cat">${p.cat}</div>
+        <div class="product-name" onclick="openModal(${p.id})">${p.name}</div>
+        <div class="product-desc">${p.desc||''}</div>
+        ${specsHTML?`<div class="product-specs">${specsHTML}</div>`:''}
+        <div class="product-footer">
+          <div>
+            ${oldPriceHTML}
+            <div class="product-price">Q${p.price.toLocaleString()}</div>
+          </div>
+          <button class="add-cart-btn" ${isAgotado||!cartEnabled?'disabled':''} onclick="event.stopPropagation();addToCart(${p.id})">${isAgotado?'Agotado':'+ Carrito'}</button>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+// ========================
+// PRODUCT MODAL
+// ========================
+function openModal(id){
+  const p=products.find(x=>x.id===id);
+  if(!p)return;
+  currentModalProduct=p;
+  document.getElementById('modal-icon').textContent=p.icon||'📦';
+  document.getElementById('modal-cat').textContent=p.cat;
+  document.getElementById('modal-name').textContent=p.name;
+  document.getElementById('modal-desc').textContent=p.desc||'Sin descripción disponible.';
+  document.getElementById('modal-price').textContent=`Q${p.price.toLocaleString()}`;
+  const oldEl=document.getElementById('modal-old-price');
+  if(p.priceOld){oldEl.textContent=`Q${p.priceOld.toLocaleString()}`;oldEl.style.display='block'}
+  else{oldEl.style.display='none'}
+  const specsEl=document.getElementById('modal-specs');
+  specsEl.innerHTML=p.specs&&p.specs.length?p.specs.map(s=>`<div class="modal-spec-row"><span style="color:var(--muted);font-family:'JetBrains Mono',monospace;font-size:11px">${s.k}</span><span style="font-family:'JetBrains Mono',monospace;font-size:12px">${s.v}</span></div>`).join(''):'';
+  const btn=document.getElementById('modal-cart-btn');
+  btn.disabled=p.status==='agotado';
+  btn.textContent=p.status==='agotado'?'Agotado':'Agregar al carrito';
+  document.getElementById('product-modal').classList.add('open');
+}
+function closeModal(){document.getElementById('product-modal').classList.remove('open')}
+function addFromModal(){
+  if(currentModalProduct)addToCart(currentModalProduct.id);
+  closeModal();
+}
+
+// ========================
+// CART
+// ========================
+function addToCart(id){
+  const p=products.find(x=>x.id===id);
+  if(!p||p.status==='agotado')return;
+  const existing=cart.find(x=>x.id===id);
+  if(existing){existing.qty++}
+  else{cart.push({id,qty:1})}
+  saveToStorage();
+  updateCartUI();
+  showToast(`✓ ${p.name} agregado al carrito`,'success');
+}
+
+function removeFromCart(id){
+  cart=cart.filter(x=>x.id!==id);
+  saveToStorage();
+  updateCartUI();
+  renderCartItems();
+}
+
+function changeQty(id,delta){
+  const item=cart.find(x=>x.id===id);
+  if(!item)return;
+  item.qty+=delta;
+  if(item.qty<=0){removeFromCart(id);return}
+  saveToStorage();
+  updateCartUI();
+  renderCartItems();
+}
+
+function updateCartUI(){
+  const total=cart.reduce((a,i)=>a+i.qty,0);
+  const countEl=document.getElementById('cart-count');
+  countEl.textContent=total;
+  countEl.style.display=total>0?'flex':'none';
+  const totalVal=cart.reduce((a,i)=>{
+    const p=products.find(x=>x.id===i.id);
+    return a+(p?p.price*i.qty:0);
+  },0);
+  document.getElementById('cart-total').textContent=`Q${totalVal.toLocaleString('es',{minimumFractionDigits:2})}`;
+}
+
+function renderCartItems(){
+  const container=document.getElementById('cart-items-container');
+  if(cart.length===0){
+    container.innerHTML=`<div class="cart-empty"><div class="empty-icon">🛒</div><p>Tu carrito está vacío</p></div>`;
+    return;
+  }
+  container.innerHTML=cart.map(item=>{
+    const p=products.find(x=>x.id===item.id);
+    if(!p)return'';
+    return `<div class="cart-item">
+      <div class="cart-item-icon">${p.icon||'📦'}</div>
+      <div class="cart-item-info">
+        <div class="cart-item-name">${p.name}</div>
+        <div class="cart-item-price">Q${(p.price*item.qty).toLocaleString('es',{minimumFractionDigits:2})}</div>
+        <div class="cart-item-controls">
+          <button class="qty-btn" onclick="changeQty(${p.id},-1)">−</button>
+          <span class="qty-display">${item.qty}</span>
+          <button class="qty-btn" onclick="changeQty(${p.id},1)">+</button>
+          <button class="remove-item" onclick="removeFromCart(${p.id})">🗑</button>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function openCart(){
+  renderCartItems();
+  updateCartUI();
+  document.getElementById('cart-sidebar').classList.add('open');
+  document.getElementById('cart-overlay').classList.add('open');
+}
+function closeCart(){
+  document.getElementById('cart-sidebar').classList.remove('open');
+  document.getElementById('cart-overlay').classList.remove('open');
+}
+
+function checkout(){
+  if(cart.length===0){showToast('⚠ Carrito vacío','error');return}
+  const code='#GRV-'+Math.floor(100000+Math.random()*900000);
+  document.getElementById('order-code').textContent=code;
+  cart=[];
+  saveToStorage();
+  updateCartUI();
+  renderCartItems();
+  closeCart();
+  document.getElementById('order-overlay').classList.add('open');
+}
+function closeOrder(){document.getElementById('order-overlay').classList.remove('open')}
+
+// ========================
+// ADMIN
+// ========================
+document.getElementById('admin-btn').addEventListener('click',()=>{
+  document.getElementById('admin-overlay').classList.add('open');
+  document.getElementById('admin-pass').value='';
+  document.getElementById('admin-error').style.display='none';
+  document.getElementById('admin-login').style.display='block';
+  document.getElementById('admin-panel-content').style.display='none';
+});
+
+function closeAdmin(){document.getElementById('admin-overlay').classList.remove('open')}
+document.getElementById('admin-overlay').addEventListener('click',e=>{if(e.target===document.getElementById('admin-overlay'))closeAdmin()});
+
+function checkPass(){
+  const val=document.getElementById('admin-pass').value;
+  if(val===ADMIN_PASSWORD){
+    document.getElementById('admin-login').style.display='none';
+    document.getElementById('admin-panel-content').style.display='block';
+    loadAdminPanel();
+  }else{
+    document.getElementById('admin-error').style.display='block';
+    document.getElementById('admin-pass').value='';
+  }
+}
+
+function loadAdminPanel(){
+  renderAdminStats();
+  renderAdminTable();
+  buildEmojiPicker();
+  buildSpecsContainer([]);
+  const nombre=document.getElementById('site-logo').textContent;
+  document.getElementById('admin-nombre').value=nombre;
+}
+
+function renderAdminStats(){
+  const totalProds=products.length;
+  const active=products.filter(p=>p.status==='activo').length;
+  const agotado=products.filter(p=>p.status==='agotado').length;
+  const totalCart=cart.reduce((a,i)=>a+i.qty,0);
+  document.getElementById('admin-stats').innerHTML=`
+    <div class="admin-stat-card"><div class="admin-stat-num">${totalProds}</div><div class="admin-stat-label">Productos</div></div>
+    <div class="admin-stat-card"><div class="admin-stat-num" style="color:var(--neon)">${active}</div><div class="admin-stat-label">Disponibles</div></div>
+    <div class="admin-stat-card"><div class="admin-stat-num" style="color:var(--neon2)">${agotado}</div><div class="admin-stat-label">Agotados</div></div>
+    <div class="admin-stat-card"><div class="admin-stat-num" style="color:var(--neon3)">${totalCart}</div><div class="admin-stat-label">En carritos</div></div>
+  `;
+  document.getElementById('product-count').textContent=totalProds;
+}
+
+function renderAdminTable(){
+  const search=(document.getElementById('admin-search')?.value||'').toLowerCase();
+  const filtered=products.filter(p=>p.name.toLowerCase().includes(search)||p.cat.toLowerCase().includes(search));
+  const tbody=document.getElementById('admin-table-body');
+  tbody.innerHTML=filtered.map(p=>`<tr>
+    <td style="font-size:24px">${p.icon||'📦'}</td>
+    <td><div class="tbl-name">${p.name}</div></td>
+    <td><div class="tbl-cat">${p.cat}</div></td>
+    <td><div class="tbl-price">Q${p.price.toLocaleString()}</div></td>
+    <td><span class="status-badge status-${p.status}">${p.status==='activo'?'Disponible':'Agotado'}</span></td>
+    <td><div class="tbl-actions">
+      <button class="tbl-btn tbl-btn-edit" onclick="editProduct(${p.id})">Editar</button>
+      <button class="tbl-btn tbl-btn-edit" onclick="toggleStatus(${p.id})">${p.status==='activo'?'Agotar':'Activar'}</button>
+      <button class="tbl-btn tbl-btn-del" onclick="deleteProduct(${p.id})">Eliminar</button>
+    </div></td>
+  </tr>`).join('');
+  document.getElementById('product-count').textContent=products.length;
+}
+
+function switchTab(tab){
+  document.querySelectorAll('.admin-tab').forEach((t,i)=>{
+    const tabs=['productos','nuevo','sitio'];
+    t.classList.toggle('active',tabs[i]===tab);
+  });
+  document.querySelectorAll('.admin-tab-content').forEach(c=>c.classList.remove('active'));
+  document.getElementById('tab-'+tab).classList.add('active');
+  if(tab==='productos')renderAdminTable();
+}
+
+const EMOJIS=['🔧','📡','💻','⚡','📶','🎒','🌡️','🌐','🔬','🔩','⚙️','🖥️','📱','🔋','🛠️','🧲'];
+function buildEmojiPicker(){
+  const picker=document.getElementById('emoji-picker');
+  picker.innerHTML=EMOJIS.map(e=>`<div class="emoji-opt" onclick="selectEmoji('${e}')">${e}</div>`).join('');
+}
+function selectEmoji(e){
+  document.getElementById('p-icon').value=e;
+  document.querySelectorAll('.emoji-opt').forEach(el=>el.classList.toggle('selected',el.textContent===e));
+}
+
+function buildSpecsContainer(specs){
+  const c=document.getElementById('specs-container');
+  c.innerHTML='';
+  (specs||[]).forEach(s=>addSpecRow(s.k,s.v));
+}
+
+function addSpecRow(k='',v=''){
+  const c=document.getElementById('specs-container');
+  if(c.children.length>=4){showToast('Máximo 4 especificaciones','error');return}
+  const row=document.createElement('div');
+  row.style.cssText='display:grid;grid-template-columns:1fr 1fr auto;gap:8px;margin-bottom:8px;align-items:center';
+  row.innerHTML=`
+    <input class="admin-input spec-key-input" type="text" placeholder="Clave (ej: CPU)" value="${k}" style="padding:8px 12px">
+    <input class="admin-input spec-val-input" type="text" placeholder="Valor (ej: 240MHz)" value="${v}" style="padding:8px 12px">
+    <button class="tbl-btn tbl-btn-del" onclick="this.parentElement.remove()" style="padding:8px 10px;white-space:nowrap">✕</button>
+  `;
+  c.appendChild(row);
+}
+
+function getSpecs(){
+  const keys=[...document.querySelectorAll('.spec-key-input')];
+  const vals=[...document.querySelectorAll('.spec-val-input')];
+  return keys.map((k,i)=>({k:k.value.trim(),v:vals[i].value.trim()})).filter(s=>s.k&&s.v);
+}
+
+function saveProduct(){
+  const name=document.getElementById('p-name').value.trim();
+  const cat=document.getElementById('p-cat').value;
+  const price=parseFloat(document.getElementById('p-price').value);
+  const priceOld=parseFloat(document.getElementById('p-price-old').value)||null;
+  const status=document.getElementById('p-status').value;
+  const badge=document.getElementById('p-badge').value;
+  const icon=document.getElementById('p-icon').value||'📦';
+  const desc=document.getElementById('p-desc').value.trim();
+  const specs=getSpecs();
+
+  if(!name||!cat||!price){showToast('⚠ Nombre, categoría y precio son obligatorios','error');return}
+
+  if(editingId!==null){
+    const idx=products.findIndex(p=>p.id===editingId);
+    if(idx>-1){products[idx]={...products[idx],name,cat,price,priceOld,status,badge,icon,desc,specs}}
+    showToast(`✓ "${name}" actualizado`,'success');
+    cancelEdit();
+  }else{
+    const newId=Math.max(0,...products.map(p=>p.id))+1;
+    products.push({id:newId,name,cat,price,priceOld,status,badge,icon,desc,specs});
+    showToast(`✓ "${name}" agregado al catálogo`,'success');
+    clearProductForm();
+  }
+
+  saveToStorage();
+  renderFilterBar();
+  renderProducts();
+  renderAdminStats();
+  renderAdminTable();
+
+  const msg=document.getElementById('save-msg');
+  msg.style.opacity='1';
+  setTimeout(()=>msg.style.opacity='0',2500);
+}
+
+function editProduct(id){
+  const p=products.find(x=>x.id===id);
+  if(!p)return;
+  editingId=id;
+  switchTab('nuevo');
+  document.getElementById('p-name').value=p.name;
+  document.getElementById('p-cat').value=p.cat;
+  document.getElementById('p-price').value=p.price;
+  document.getElementById('p-price-old').value=p.priceOld||'';
+  document.getElementById('p-status').value=p.status;
+  document.getElementById('p-badge').value=p.badge||'';
+  document.getElementById('p-icon').value=p.icon||'';
+  document.getElementById('p-desc').value=p.desc||'';
+  buildSpecsContainer(p.specs||[]);
+  document.getElementById('edit-mode-banner').style.display='block';
+  document.getElementById('edit-id-display').textContent=id;
+  document.getElementById('save-product-btn').textContent='Actualizar Producto';
+  document.getElementById('cancel-edit-btn').style.display='inline-flex';
+  selectEmoji(p.icon||'');
+}
+
+function cancelEdit(){
+  editingId=null;
+  clearProductForm();
+  document.getElementById('edit-mode-banner').style.display='none';
+  document.getElementById('save-product-btn').textContent='Guardar Producto';
+  document.getElementById('cancel-edit-btn').style.display='none';
+}
+
+function clearProductForm(){
+  ['p-name','p-cat','p-price','p-price-old','p-status','p-badge','p-icon','p-desc'].forEach(id=>{
+    const el=document.getElementById(id);
+    if(el)el.value=el.tagName==='SELECT'?(id==='p-status'?'activo':''):''
+  });
+  buildSpecsContainer([]);
+  document.querySelectorAll('.emoji-opt').forEach(e=>e.classList.remove('selected'));
+}
+
+function deleteProduct(id){
+  const p=products.find(x=>x.id===id);
+  if(!p)return;
+  if(!confirm(`¿Eliminar "${p.name}"? Esta acción no se puede deshacer.`))return;
+  products=products.filter(x=>x.id!==id);
+  cart=cart.filter(x=>x.id!==id);
+  saveToStorage();
+  renderFilterBar();
+  renderProducts();
+  renderAdminStats();
+  renderAdminTable();
+  showToast(`🗑 "${p.name}" eliminado`,'success');
+}
+
+function toggleStatus(id){
+  const p=products.find(x=>x.id===id);
+  if(!p)return;
+  p.status=p.status==='activo'?'agotado':'activo';
+  saveToStorage();
+  renderProducts();
+  renderAdminStats();
+  renderAdminTable();
+  showToast(`✓ "${p.name}" → ${p.status==='activo'?'Disponible':'Agotado'}`,'success');
+}
+
+function applySiteSettings(){
+  const nombre=document.getElementById('admin-nombre').value.trim();
+  const eslogan=document.getElementById('admin-eslogan').value.trim();
+  const subtitulo=document.getElementById('admin-subtitulo').value.trim();
+  if(nombre){
+    document.getElementById('site-logo').innerHTML=nombre.toUpperCase().replace('/',' <span>/</span> ');
+    document.getElementById('footer-logo').textContent=nombre.toUpperCase();
+    document.getElementById('footer-text').textContent=`© 2025 ${nombre} · Fabricante de Tecnología · Guatemala`;
+  }
+  if(eslogan){
+    const lines=document.querySelectorAll('.hero-title .line1,.hero-title .line2,.hero-title .line3');
+    const words=eslogan.toUpperCase().split(' ');
+    if(lines[0])lines[0].textContent=words.slice(0,Math.ceil(words.length/3)).join(' ');
+    if(lines[1])lines[1].textContent=words.slice(Math.ceil(words.length/3),Math.ceil(2*words.length/3)).join(' ');
+    if(lines[2])lines[2].textContent=words.slice(Math.ceil(2*words.length/3)).join(' ');
+  }
+  if(subtitulo){document.querySelector('.hero-sub').textContent=subtitulo}
+  renderProducts();
+  const msg=document.getElementById('site-save-msg');
+  msg.style.opacity='1';
+  setTimeout(()=>msg.style.opacity='0',2500);
+  showToast('✓ Configuración aplicada','success');
+}
+
+function resetAll(){
+  products=[...DEFAULT_PRODUCTS];
+  cart=[];
+  saveToStorage();
+  renderFilterBar();
+  renderProducts();
+  renderAdminStats();
+  renderAdminTable();
+  showToast('Datos reiniciados a valores por defecto','success');
+}
+
+function submitContact(){
+  const n=document.getElementById('contact-nombre').value.trim();
+  const e=document.getElementById('contact-email').value.trim();
+  if(!n||!e){showToast('⚠ Completa nombre y email','error');return}
+  document.getElementById('contact-nombre').value='';
+  document.getElementById('contact-email').value='';
+  showToast('✓ Mensaje enviado. Te contactaremos pronto.','success');
+}
+
+// ========================
+// INIT
+// ========================
+renderFilterBar();
+renderProducts();
+updateCartUI();
+</script>
+</body>
+</html>
