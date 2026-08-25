@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Industrias Garavito — Fabricante guatemalteco de hardware, sensores y módulos IoT de precisión.">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://*.supabase.co;">
+<title>Industrias Garavito — Tecnología del Futuro</title>
+<link rel="canonical" href="index.html">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;700;900&family=JetBrains+Mono:wght@300;400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div id="cursor"></div>
+<div id="cursor-trail"></div>
+<div id="toast-container"></div>
+<div id="cart-overlay" onclick="closeCart()"></div>
+
+<!-- NAV -->
+<nav>
+  <a class="logo" id="site-logo" href="index.html">IND<span>/</span>GARAVITO</a>
+  <ul class="nav-links">
+    <li><a href="index.html" class="active">Inicio</a></li>
+    <li><a href="tienda.html">Tienda</a></li>
+    <li><a href="nosotros.html">Nosotros</a></li>
+    <li><a href="contacto.html">Contacto</a></li>
+  </ul>
+  <div class="nav-right">
+    <a class="cart-btn" href="tienda.html" style="text-decoration:none">
+      🛒 Carrito
+      <span class="cart-count" id="cart-count" style="display:none">0</span>
+    </a>
+    <button class="hamburger" onclick="toggleMobileMenu()" id="hamburger-btn">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobile-menu">
+  <a href="index.html" class="active">Inicio</a>
+  <a href="tienda.html">Tienda</a>
+  <a href="nosotros.html">Nosotros</a>
+  <a href="contacto.html">Contacto</a>
+</div>
+
+<!-- WHATSAPP FLOAT -->
+<a id="wa-float" href="#" target="_blank" rel="noopener noreferrer" title="Contáctanos por WhatsApp">💬</a>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="grid-lines"></div>
+  <div class="hero-tag">Fabricante de Tecnología de Precisión</div>
+  <h1 class="hero-title">
+    <span class="line1">HARDWARE</span>
+    <span class="line2">DEL FUTURO</span>
+    <span class="line3">HOY.</span>
+  </h1>
+  <p class="hero-sub">Dispositivos, componentes y sistemas electrónicos de alta precisión. Diseñados en Guatemala. Construidos para el mundo.</p>
+  <div class="hero-actions">
+    <a class="btn-primary" href="tienda.html" style="text-decoration:none;display:inline-block">Ver Catálogo</a>
+    <a class="btn-secondary" href="nosotros.html" style="text-decoration:none;display:inline-block">Nuestra Tecnología</a>
+  </div>
+  <div class="hero-visual">
+    <div class="model-container">
+      <div class="model-rings"></div>
+      <canvas id="heroCanvas"></canvas>
+    </div>
+  </div>
+  <div class="stats-bar">
+    <div class="stat-item"><div class="stat-num" id="cnt1">0</div><div class="stat-label">Unidades vendidas</div></div>
+    <div class="stat-item"><div class="stat-num" id="cnt2">0</div><div class="stat-label">Clientes activos</div></div>
+    <div class="stat-item"><div class="stat-num">4.9★</div><div class="stat-label">Valoración media</div></div>
+    <div class="stat-item"><div class="stat-num" id="cnt3">0</div><div class="stat-label">Países con envío</div></div>
+  </div>
+</section>
+
+<!-- DESTACADOS -->
+<section id="catalogo" style="padding:80px 40px 100px">
+  <div class="section-header reveal">
+    <div>
+      <div class="section-tag">// 01 — Destacados</div>
+      <h2 class="section-title">Lo más pedido<br><span>de la tienda</span></h2>
+    </div>
+    <p class="section-desc">Tecnología de fabricación propia. Garantía total. Envío desde Guatemala a toda Latinoamérica.</p>
+  </div>
+  <div class="teaser-grid reveal" id="teaser-grid"></div>
+  <div style="text-align:center">
+    <a class="btn-primary" href="tienda.html" style="text-decoration:none;display:inline-block">Ver catálogo completo →</a>
+  </div>
+</section>
+
+<!-- NOSOTROS (resumen) -->
+<section id="nosotros" style="padding:0 40px 100px">
+  <div class="section-header reveal">
+    <div>
+      <div class="section-tag">// 02 — Empresa</div>
+      <h2 class="section-title">Tecnología hecha<br><span>en Guatemala</span></h2>
+    </div>
+  </div>
+  <div class="nosotros-grid reveal" style="display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:rgba(0,255,178,0.06)">
+    <div style="background:var(--bg);padding:36px 32px">
+      <div style="font-size:34px;margin-bottom:14px">⚡</div>
+      <div style="font-size:18px;font-weight:700;margin-bottom:10px">Ingeniería Propia</div>
+      <div style="font-size:14px;line-height:1.7;color:rgba(232,244,255,0.45)">Cada producto es diseñado, prototipado y manufacturado en nuestras instalaciones en Guatemala City.</div>
+    </div>
+    <div style="background:var(--card);padding:36px 32px">
+      <div style="font-size:34px;margin-bottom:14px">🔬</div>
+      <div style="font-size:18px;font-weight:700;margin-bottom:10px">I+D Constante</div>
+      <div style="font-size:14px;line-height:1.7;color:rgba(232,244,255,0.45)">Laboratorio de innovación activo. Lanzamos nuevos productos cada trimestre basados en feedback de clientes.</div>
+    </div>
+    <div style="background:var(--bg);padding:36px 32px">
+      <div style="font-size:34px;margin-bottom:14px">🌐</div>
+      <div style="font-size:18px;font-weight:700;margin-bottom:10px">Alcance Regional</div>
+      <div style="font-size:14px;line-height:1.7;color:rgba(232,244,255,0.45)">Distribución en toda Centroamérica y envíos a Sudamérica, México y Estados Unidos.</div>
+    </div>
+  </div>
+  <div style="text-align:center;margin-top:36px">
+    <a class="btn-secondary" href="nosotros.html" style="text-decoration:none;display:inline-block">Conocer más sobre nosotros →</a>
+  </div>
+</section>
+
+<!-- CONTACTO CTA -->
+<section id="contacto" style="padding:0 40px 100px">
+  <div style="border:1px solid var(--border);background:linear-gradient(135deg,var(--card),var(--bg2));padding:56px 52px;clip-path:polygon(24px 0%,100% 0%,100% calc(100% - 24px),calc(100% - 24px) 100%,0% 100%,0% 24px);position:relative" class="reveal">
+    <div style="position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 50%,rgba(0,255,178,0.04),transparent)"></div>
+    <div style="font-size:clamp(28px,5vw,56px);font-weight:900;letter-spacing:-0.03em;margin-bottom:14px">¿Proyecto especial o<br>pedido <em style="font-style:normal;color:var(--neon)">mayorista</em>?</div>
+    <p style="font-size:15px;line-height:1.7;color:rgba(232,244,255,0.45);max-width:500px;margin-bottom:36px;font-weight:300">Contáctanos para cotizaciones personalizadas, integraciones y proyectos a medida.</p>
+    <a class="btn-primary" href="contacto.html" style="text-decoration:none;display:inline-block">Ir a Contacto →</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo" id="footer-logo">IND/GARAVITO</div>
+  <div class="footer-text" id="footer-text">© 2026 Industrias Garavito · Fabricante de Tecnología · Guatemala</div>
+  <div style="font-family:'JetBrains Mono',monospace;color:var(--neon);font-size:11px">SYS.STATUS: ONLINE</div>
+</footer>
+
+<script type="module" src="js/supabase-client.js"></script>
+<script type="module" src="js/main.js"></script>
+<script type="module" src="js/store.js"></script>
+</body>
+</html>
